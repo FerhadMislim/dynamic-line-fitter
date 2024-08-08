@@ -16,38 +16,48 @@ The Dynamic Line Fitter application allows users to interactively add points on 
 ### Mathematical Formula for Line Fitting
 
 1. **Calculate Averages**:
-   - Compute the average of the x-coordinates (\(x_c\)) and the average of the y-coordinates (\(y_c\)) of all points:
-    $$
+   - Compute the average of the x-coordinates x_c and the average of the y-coordinates y_c of all points:
+
+    ```math
     x_c = \frac{1}{n} \sum_{i=1}^{n} x_i
-    $$
-    $$
+    
     y_c = \frac{1}{n} \sum_{i=1}^{n} y_i
-    $$
-     where \(n\) is the number of points, \(x_i\) and \(y_i\) are the x and y coordinates of the \(i\)-th point.
+    ```
 
 2. **Calculate Individual Slopes**:
    - For each point, compute the slope \(m_i\) based on the average position:
-    $$
+
+    ```math
     m_i = \frac{y_c - y_i}{x_c - x_i}
-    $$
-     where \(x_i\) and \(y_i\) are the coordinates of the \(i\)-th point.
+    ```
+     where x_i and y_i are the coordinates of the i-th point.
 
 3. **Average Slope**:
-   - Calculate the average slope \(m\) from the individual slopes:
-    $$
+   - Calculate the average slope m from the individual slopes:
+
+    ```math
     m = \frac{1}{n} \sum_{i=1}^{n} m_i
-    $$
+    ```
 
 4. **Calculate Line Endpoints**:
    - Determine the coordinates for the start and end of the line based on the canvas width and the average slope:
-     - For the left side of the canvas (\(x_1 = 0\)):
-       $$
-       y_1 = m \cdot (x_1 - x_c) + y_c
-       $$
-     - For the right side of the canvas (\(x_2 = \text{window.innerWidth}\)):
+     - For the left side of the canvas:
 
-       $$
-       y_2 = m \cdot (x_2 - x_c) + y_c
-       $$
+    ```math
+    x_1 = 0
+    ```
+
+    ```math
+    y_1 = m \cdot (x_1 - x_c) + y_c
+    ```
+     - For the right side of the canvas: 
+     
+    ```math
+    x_2 = window.innerWidth
+    ```
+
+    ```math
+    y_2 = m \cdot (x_2 - x_c) + y_c
+    ```
 
 
