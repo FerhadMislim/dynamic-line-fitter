@@ -63,3 +63,6 @@ The Dynamic Line Fitter application allows users to interactively add points on 
     ```
 
 
+## Note
+
+The mathematical approach used in this project for line fitting is a custom method developed for this specific application. While this method provides a dynamic line fitting solution, it differs from standard regression analysis techniques typically used to find the best-fitting line. Regression analysis usually employs methods like least squares to minimize the overall error between the line and all data points.
