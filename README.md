@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Dynamic Line Fitter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The Dynamic Line Fitter application allows users to interactively add points on a blank canvas. As points are added, a line is dynamically fitted through all points based on their average position and slope. The application also includes controls to clear the board or delete the last point added.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Add Points**: Click on the canvas to add points.
+- **Dynamic Line Fitting**: A line is automatically adjusted to fit all points based on their average position and slope.
+- **Clear Board**: Button to remove all points and reset the canvas.
+- **Delete Last Point**: Button to remove the most recently added point.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How It Works
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Mathematical Formula for Line Fitting
 
-### `npm test`
+1. **Calculate Averages**:
+   - Compute the average of the x-coordinates (\(x_c\)) and the average of the y-coordinates (\(y_c\)) of all points:
+     \[
+     x_c = \frac{1}{n} \sum_{i=1}^{n} x_i
+     \]
+     \[
+     y_c = \frac{1}{n} \sum_{i=1}^{n} y_i
+     \]
+     where \(n\) is the number of points, \(x_i\) and \(y_i\) are the x and y coordinates of the \(i\)-th point.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Calculate Individual Slopes**:
+   - For each point, compute the slope \(m_i\) based on the average position:
+     \[
+     m_i = \frac{y_c - y_i}{x_c - x_i}
+     \]
+     where \(x_i\) and \(y_i\) are the coordinates of the \(i\)-th point.
 
-### `npm run build`
+3. **Average Slope**:
+   - Calculate the average slope \(m\) from the individual slopes:
+     \[
+     m = \frac{1}{n} \sum_{i=1}^{n} m_i
+     \]
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Calculate Line Endpoints**:
+   - Determine the coordinates for the start and end of the line based on the canvas width and the average slope:
+     - For the left side of the canvas (\(x_1 = 0\)):
+       \[
+       y_1 = m \cdot (x_1 - x_c) + y_c
+       \]
+     - For the right side of the canvas (\(x_2 = \text{window.innerWidth}\)):
+       \[
+       y_2 = m \cdot (x_2 - x_c) + y_c
+       \]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
