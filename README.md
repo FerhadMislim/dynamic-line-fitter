@@ -20,7 +20,9 @@ The Dynamic Line Fitter application allows users to interactively add points on 
 
     ```math
     x_c = \frac{1}{n} \sum_{i=1}^{n} x_i
-    
+    ```
+
+    ```math
     y_c = \frac{1}{n} \sum_{i=1}^{n} y_i
     ```
 
@@ -51,7 +53,7 @@ The Dynamic Line Fitter application allows users to interactively add points on 
     y_1 = m \cdot (x_1 - x_c) + y_c
     ```
      - For the right side of the canvas: 
-     
+
     ```math
     x_2 = window.innerWidth
     ```
