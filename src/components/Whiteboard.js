@@ -5,19 +5,48 @@ import '../style.css';
 
 function Whiteboard() {
   const [points, setPoints] = useState([]);
+  const [lineFormula, setLineFormula] = useState('');
 
   const handleClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const newPoint = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    setPoints([...points, newPoint]);
+    setPoints((prevPoints) => {
+      const updatedPoints = [...prevPoints, newPoint];
+      updateLineFormula(updatedPoints);
+      return updatedPoints;
+    });
   };
 
   const handleClear = () => {
     setPoints([]);
+    setLineFormula('');
   };
 
   const handleDeleteLast = () => {
-    setPoints(points.slice(0, -1));
+    setPoints((prevPoints) => {
+      const updatedPoints = prevPoints.slice(0, -1);
+      updateLineFormula(updatedPoints);
+      return updatedPoints;
+    });
+  };
+
+  const updateLineFormula = (points) => {
+    if (points.length < 2) {
+      setLineFormula('');
+      return;
+    }
+
+    const fitLineResult = fitLine(points);
+    if (!fitLineResult) {
+      setLineFormula('Error calculating line');
+      return;
+    }
+
+    const { x1, y1, x2, y2 } = fitLineResult[0];
+    const m = (y2 - y1) / (x2 - x1);
+    const intercept = y1 - m * x1;
+
+    setLineFormula(`y = ${m.toFixed(2)}x + ${intercept.toFixed(2)}`);
   };
 
   const lines = fitLine(points);
@@ -45,6 +74,10 @@ function Whiteboard() {
             />
           ))}
         </svg>
+      </div>
+      <div className="line-formula">
+        <p>Current Line Formula:</p>
+        <p>{lineFormula}</p>
       </div>
     </div>
   );
