@@ -41,9 +41,9 @@ The Dynamic Line Fitter application allows users to interactively add points on 
 4. **Calculate Line Endpoints**:
    - Determine the coordinates for the start and end of the line based on the canvas width and the average slope:
      - For the left side of the canvas (\(x_1 = 0\)):
-       $$
+       ```math
        y_1 = m \cdot (x_1 - x_c) + y_c
-       $$
+       ```
      - For the right side of the canvas (\(x_2 = \text{window.innerWidth}\)):
        $$
        y_2 = m \cdot (x_2 - x_c) + y_c
