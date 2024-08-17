@@ -13,5 +13,5 @@ export function fitLine(points) {
   const x2 = window.innerWidth; // Ending point for the line (right side of the canvas)
   const y2 = avgSlope * (x2 - xAvg) + yAvg;
 
-  return [{ x1, y1, x2, y2 }];
+  return { x1, y1, x2, y2 };
 }
