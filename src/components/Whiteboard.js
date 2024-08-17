@@ -42,14 +42,14 @@ function Whiteboard() {
       return;
     }
 
-    const { x1, y1, x2, y2 } = fitLineResult[0];
+    const { x1, y1, x2, y2 } = fitLineResult;
     const m = (y2 - y1) / (x2 - x1);
     const intercept = y1 - m * x1;
 
     setLineFormula(`y = ${m.toFixed(2)}x + ${intercept.toFixed(2)}`);
   };
 
-  const lines = fitLine(points);
+  const line = fitLine(points);
 
   return (
     <div className="whiteboard-container">
@@ -62,9 +62,7 @@ function Whiteboard() {
           <Point key={index} x={point.x} y={point.y} />
         ))}
         <svg className="lines">
-          {lines.map((line, index) => (
             <line
-              key={index}
               x1={line.x1}
               y1={line.y1}
               x2={line.x2}
@@ -72,7 +70,6 @@ function Whiteboard() {
               stroke="#2C59BA"
               strokeWidth="3"
             />
-          ))}
         </svg>
       </div>
       <div className="line-formula">
